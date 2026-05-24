@@ -11,8 +11,10 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(express.json({ limit: '10mb' }));
-app.use(cors({ origin: process.env.CLIENT_URL || '*' }));
+// Parse JSON bodies
+app.use(express.json());
+// Enable CORS with default settings
+app.use(cors());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);

@@ -19,7 +19,12 @@ const Register = () => {
       setAuth({ token: data.token, user: data.user });
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      console.error('Registration error:', err);
+      const backendMessage = err.response?.data?.message ||
+        (err.response?.data && JSON.stringify(err.response.data)) ||
+        err.message ||
+        'Registration failed';
+      setError(backendMessage);
     }
   };
 

@@ -6,6 +6,11 @@ export const loginUser = async (credentials) => {
 };
 
 export const registerUser = async (payload) => {
-  const response = await api.post('/auth/register', payload);
-  return response.data;
+  try {
+    const response = await api.post('/auth/register', payload);
+    return response.data;
+  } catch (err) {
+    console.error('registerUser error:', err.response?.data || err.message || err);
+    throw err;
+  }
 };
